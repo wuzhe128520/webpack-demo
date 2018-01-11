@@ -1,9 +1,39 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
-    entry: './src/index.js',
+    entry: {
+        app: './src/index.js',
+
+    },
+    //代码错误追踪
+    devtool: 'inline-source-map',
+
+    //告知 webpack-dev-server，在 localhost:8080 下建立服务，将 dist 目录下的文件，作为可访问文件。
+    devServer: {
+        contentBase: './dist',
+        hot: true
+    },
+    plugins: [
+
+        //清理dist文件夹
+        new CleanWebpackPlugin(['dist']),
+
+        //解决多个bundle生成出现的bug
+        new HtmlWebpackPlugin({
+            title: 'Output Management'
+        }),
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+
+        //删除无用的代码和注释
+        new UglifyJsPlugin()
+    ],
     output: {
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
     /*
