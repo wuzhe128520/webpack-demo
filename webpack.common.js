@@ -52,7 +52,14 @@ module.exports = {
                 use: [
                     'file-loader'
                 ]
+            },
+
+            //编译less
+            {
+                test: /\.less$/,
+                loader: 'style-loader!css-loader!less-loader'
             }
+
         ]
     },
 

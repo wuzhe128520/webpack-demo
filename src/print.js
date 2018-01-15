@@ -1,4 +1,3 @@
 export default function printMe() {
-    console.log('Updating print.js...');
-    console.log('好神奇!');
+    console.log('热更新是什么鬼……');
 }

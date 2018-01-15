@@ -4,12 +4,13 @@ const common = require('./webpack.common.js');
 const webpack = require('webpack');
 
 module.exports = merge(common, {
+    devtool: 'source-map',
     plugins: [
 
         //移除无用代码
-        new UglifyJsPlugin({
+      /*  new UglifyJsPlugin({
             sourceMap: true
-        }),
+        }),*/
         new webpack.DefinePlugin({
             'procee.env': {
                 'NODE_ENV': JSON.stringify('production')
